@@ -96,7 +96,9 @@ class YouTubeUploader:
 		absolute_video_path = str(Path.cwd() / self.video_path)
 		self.browser.find(By.XPATH, Constant.INPUT_FILE_VIDEO).send_keys(
 			absolute_video_path)
+		
 		self.logger.debug('Attached video {}'.format(self.video_path))
+		print(absolute_video_path)
 
 		if self.thumbnail_path is not None:
 			absolute_thumbnail_path = str(Path.cwd() / self.thumbnail_path)
