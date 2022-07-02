@@ -122,12 +122,15 @@ class YouTubeUploader:
 
 		kids_section = self.browser.find(
 			By.NAME, Constant.NOT_MADE_FOR_KIDS_LABEL)
-		self.browser.find(By.ID, Constant.RADIO_LABEL, kids_section).click()
+		kids_section_new = self.browser.find(By.ID, Constant.RADIO_LABEL, kids_section)
+		ActionChains(self.browser.driver).move_to_element(kids_section_new).click(kids_section_new)
+		#self.browser.find(By.ID, Constant.RADIO_LABEL, kids_section).click()
 		self.logger.debug('Selected \"{}\"'.format(
 			Constant.NOT_MADE_FOR_KIDS_LABEL))
 
 		# Advanced options
-		self.browser.find(By.XPATH, Constant.MORE_BUTTON).click()
+		ActionChains(self.browser.driver).move_to_element(self.browser.find(By.XPATH, Constant.MORE_BUTTON)).click(self.browser.find(By.XPATH, Constant.MORE_BUTTON))
+		# self.browser.find(By.XPATH, Constant.MORE_BUTTON).click()
 		self.logger.debug('Clicked MORE OPTIONS')
 
 		tags_container = self.browser.find(By.XPATH,
@@ -139,19 +142,24 @@ class YouTubeUploader:
 		self.logger.debug(
 			'The tags were set to \"{}\"'.format(self.metadata_dict[Constant.VIDEO_TAGS]))
 
-
-		self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
+		next_btn = self.browser.find(By.ID, Constant.NEXT_BUTTON)
+		ActionChains(self.browser.driver).move_to_element(next_btn).click(next_btn)
+		# self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
 		self.logger.debug('Clicked {} one'.format(Constant.NEXT_BUTTON))
 
 		# Thanks to romka777
-		self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
+		ActionChains(self.browser.driver).move_to_element(next_btn).click(next_btn)
+		# self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
 		self.logger.debug('Clicked {} two'.format(Constant.NEXT_BUTTON))
 
-		self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
+		ActionChains(self.browser.driver).move_to_element(next_btn).click(next_btn)
+		# self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
 		self.logger.debug('Clicked {} three'.format(Constant.NEXT_BUTTON))
 		public_main_button = self.browser.find(By.NAME, Constant.PUBLIC_BUTTON)
-		self.browser.find(By.ID, Constant.RADIO_LABEL,
-						  public_main_button).click()
+		public_main_button_new = self.browser.find(By.ID, Constant.RADIO_LABEL, public_main_button)
+		ActionChains(self.browser.driver).move_to_element(public_main_button_new).click(public_main_button_new)
+		# self.browser.find(By.ID, Constant.RADIO_LABEL,
+		# 				  public_main_button).click()
 		self.logger.debug('Made the video {}'.format(Constant.PUBLIC_BUTTON))
 
 		video_id = self.__get_video_id()
@@ -175,7 +183,8 @@ class YouTubeUploader:
 			self.logger.error(error_message)
 			return False, None
 
-		done_button.click()
+		# done_button.click()
+		ActionChains(self.browser.driver).move_to_element(done_button).click(done_button)
 		self.logger.debug(
 			"Published the video with video_id = {}".format(video_id))
 		time.sleep(Constant.BROSWER_WAITING_TIME)
