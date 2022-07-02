@@ -164,6 +164,8 @@ class YouTubeUploader:
 
 		video_id = self.__get_video_id()
 
+		print(f"1:{video_id}")
+
 		status_container = self.browser.find(By.XPATH,
 											 Constant.STATUS_CONTAINER)
 		while True:
@@ -175,6 +177,7 @@ class YouTubeUploader:
 
 		done_button = self.browser.find(By.ID, Constant.DONE_BUTTON)
 
+		print(f"2:{video_id}")
 		# Catch such error as
 		# "File is a duplicate of a video you have already uploaded"
 		if done_button.get_attribute('aria-disabled') == 'true':
@@ -183,6 +186,7 @@ class YouTubeUploader:
 			self.logger.error(error_message)
 			return False, None
 
+		print(f"3:{video_id}")
 		# done_button.click()
 		ActionChains(self.browser.driver).move_to_element(done_button).click(done_button)
 		self.logger.debug(
