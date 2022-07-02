@@ -3,6 +3,7 @@
 
 from typing import DefaultDict, Optional
 from selenium_firefox.firefox import Firefox, By, Keys
+from selenium.webdriver import ActionChains
 from collections import defaultdict
 import json
 import time
@@ -30,7 +31,7 @@ class YouTubeUploader:
 		self.thumbnail_path = thumbnail_path
 		self.metadata_dict = load_metadata(metadata_json_path)
 		current_working_dir = str(Path.cwd())
-		self.browser = Firefox(current_working_dir, current_working_dir)
+		self.browser = Firefox(current_working_dir, current_working_dir, headless=True)
 		self.logger = logging.getLogger(__name__)
 		self.logger.setLevel(logging.DEBUG)
 		self.__validate_inputs()
@@ -76,16 +77,16 @@ class YouTubeUploader:
 			self.browser.save_cookies()
 
 	def __write_in_field(self, field, string, select_all=False):
-		field.click()
+		actionChains = ActionChains(self.browser).move_to_element(field).click(field)
 
 		time.sleep(Constant.USER_WAITING_TIME)
 		if select_all:
 			if self.is_mac:
-				field.send_keys(Keys.COMMAND + 'a')
+				actionChains.send_keys(Keys.COMMAND + 'a')
 			else:
-				field.send_keys(Keys.CONTROL + 'a')
+				actionChains.send_keys(Keys.CONTROL + 'a')
 			time.sleep(Constant.USER_WAITING_TIME)
-		field.send_keys(string)
+		actionChains.send_keys(string).perform()
 
 	def __upload(self) -> (bool, Optional[str]):
 		self.browser.get(Constant.YOUTUBE_URL)
