@@ -77,7 +77,7 @@ class YouTubeUploader:
 			self.browser.save_cookies()
 
 	def __write_in_field(self, field, string, select_all=False):
-		actionChains = ActionChains(self.browser).move_to_element(field).click(field)
+		actionChains = ActionChains(self.browser.driver).move_to_element(field).click(field)
 
 		time.sleep(Constant.USER_WAITING_TIME)
 		if select_all:
