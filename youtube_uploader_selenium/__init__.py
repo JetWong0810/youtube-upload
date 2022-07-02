@@ -82,9 +82,9 @@ class YouTubeUploader:
 		time.sleep(Constant.USER_WAITING_TIME)
 		if select_all:
 			if self.is_mac:
-				actionChains.send_keys(Keys.COMMAND + 'a')
+				actionChains.send_keys(Keys.COMMAND + 'a').perform()
 			else:
-				actionChains.send_keys(Keys.CONTROL + 'a')
+				actionChains.send_keys(Keys.CONTROL + 'a').perform()
 			time.sleep(Constant.USER_WAITING_TIME)
 		actionChains.send_keys(string).perform()
 
@@ -94,11 +94,11 @@ class YouTubeUploader:
 		self.browser.get(Constant.YOUTUBE_UPLOAD_URL)
 		time.sleep(Constant.USER_WAITING_TIME)
 		absolute_video_path = str(Path.cwd() / self.video_path)
-		self.browser.find(By.XPATH, Constant.INPUT_FILE_VIDEO).send_keys(
-			absolute_video_path)
+		ActionChains(self.browser.driver).move_to_element(self.browser.find(By.XPATH, Constant.INPUT_FILE_VIDEO)).send_keys(absolute_video_path).perform()
+		# self.browser.find(By.XPATH, Constant.INPUT_FILE_VIDEO).send_keys(
+		# 	absolute_video_path).perform()
 		
 		self.logger.debug('Attached video {}'.format(self.video_path))
-		print(absolute_video_path)
 
 		if self.thumbnail_path is not None:
 			absolute_thumbnail_path = str(Path.cwd() / self.thumbnail_path)
