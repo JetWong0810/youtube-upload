@@ -162,6 +162,8 @@ class YouTubeUploader:
 		# 				  public_main_button).click()
 		self.logger.debug('Made the video {}'.format(Constant.PUBLIC_BUTTON))
 
+		time.sleep(Constant.VIDEO_GENERATE_TIME)
+
 		video_id = self.__get_video_id()
 
 		print(f"1:{video_id}")
