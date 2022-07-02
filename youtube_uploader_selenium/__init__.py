@@ -203,6 +203,7 @@ class YouTubeUploader:
 				By.XPATH, Constant.VIDEO_URL_CONTAINER)
 			video_url_element = self.browser.find(By.XPATH, Constant.VIDEO_URL_ELEMENT,
 												  element=video_url_container)
+			print(video_url_element.get_attribute(Constant.HREF))
 			video_id = video_url_element.get_attribute(
 				Constant.HREF).split('/')[-1]
 		except:
