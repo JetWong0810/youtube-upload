@@ -94,7 +94,7 @@ class YouTubeUploader:
 		self.browser.get(Constant.YOUTUBE_UPLOAD_URL)
 		time.sleep(Constant.USER_WAITING_TIME)
 		absolute_video_path = str(Path.cwd() / self.video_path)
-		ActionChains(self.browser.driver).move_to_element(self.browser.find(By.XPATH, Constant.INPUT_FILE_VIDEO)).send_keys(absolute_video_path).perform()
+		ActionChains(self.browser.driver).move_to_element(self.browser.find(By.XPATH, Constant.INPUT_FILE_VIDEO)).click(self.browser.find(By.XPATH, Constant.INPUT_FILE_VIDEO)).send_keys(absolute_video_path).perform()
 		# self.browser.find(By.XPATH, Constant.INPUT_FILE_VIDEO).send_keys(
 		# 	absolute_video_path).perform()
 		
