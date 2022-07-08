@@ -4,8 +4,6 @@ class Constant:
     YOUTUBE_STUDIO_URL = 'https://studio.youtube.com'
     YOUTUBE_UPLOAD_URL = 'https://www.youtube.com/upload'
     USER_WAITING_TIME = 1
-    BROSWER_WAITING_TIME = 600
-    VIDEO_GENERATE_TIME = 10
     VIDEO_TITLE = 'title'
     VIDEO_DESCRIPTION = 'description'
     VIDEO_TAGS = 'tags'
@@ -28,7 +26,7 @@ class Constant:
     VIDEO_URL_CONTAINER = "//span[@class='video-url-fadeable style-scope ytcp-video-info']"
     VIDEO_URL_ELEMENT = "//a[@class='style-scope ytcp-video-info']"
     HREF = 'href'
-    UPLOADED = 'Uploading'
+    UPLOADED = '正在上传'
     ERROR_CONTAINER = '//*[@id="error-message"]'
     VIDEO_NOT_FOUND_ERROR = 'Could not find video_id'
     DONE_BUTTON = 'done-button'
