@@ -3,8 +3,6 @@
 
 from typing import DefaultDict, Optional
 from selenium_firefox.firefox import Firefox, By, Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from collections import defaultdict
 import json
 import time
@@ -78,8 +76,7 @@ class YouTubeUploader:
 			self.browser.save_cookies()
 
 	def __write_in_field(self, field, string, select_all=False):
-		WebDriverWait(self.browser.driver, 1000000).until(EC.presence_of_element_located(field)).click()
-		# field.click()
+		field.click()
 
 		time.sleep(Constant.USER_WAITING_TIME)
 		if select_all:
@@ -115,6 +112,8 @@ class YouTubeUploader:
 		self.logger.debug('The video title was set to \"{}\"'.format(
 			self.metadata_dict[Constant.VIDEO_TITLE]))
 
+		time.sleep(Constant.CLICK_WAITING_TIME)
+
 		video_description = self.metadata_dict[Constant.VIDEO_DESCRIPTION]
 		video_description = video_description.replace("\n", Keys.ENTER);
 		if video_description:
@@ -122,11 +121,15 @@ class YouTubeUploader:
 			self.__write_in_field(description_field, video_description, select_all=True)
 			self.logger.debug('Description filled.')
 
+		time.sleep(Constant.CLICK_WAITING_TIME)
+
 		kids_section = self.browser.find(
 			By.NAME, Constant.NOT_MADE_FOR_KIDS_LABEL)
 		self.browser.find(By.ID, Constant.RADIO_LABEL, kids_section).click()
 		self.logger.debug('Selected \"{}\"'.format(
 			Constant.NOT_MADE_FOR_KIDS_LABEL))
+
+		time.sleep(Constant.CLICK_WAITING_TIME)
 
 		# Advanced options
 		self.browser.find(By.XPATH, Constant.MORE_BUTTON).click()
