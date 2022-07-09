@@ -3,6 +3,8 @@
 
 from typing import DefaultDict, Optional
 from selenium_firefox.firefox import Firefox, By, Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from collections import defaultdict
 import json
 import time
@@ -76,7 +78,8 @@ class YouTubeUploader:
 			self.browser.save_cookies()
 
 	def __write_in_field(self, field, string, select_all=False):
-		field.click()
+		WebDriverWait(self.browser.driver, 1000000).until(EC.presence_of_element_located(field)).click()
+		# field.click()
 
 		time.sleep(Constant.USER_WAITING_TIME)
 		if select_all:
